@@ -1,12 +1,8 @@
 /* Galeria */
 .gallery-container {
   overflow-x: scroll;
-  overflow-y: hidden; /* Impede o scroll vertical */
   white-space: nowrap;
-  height: calc(100vh - 10px); /* Usa 100% da altura da viewport menos o espaçamento de 5px no topo e no fundo */
-  padding-top: 5px;
-  padding-bottom: 5px;
-  box-sizing: border-box; /* Inclui o padding dentro da altura total */
+  /*max-height: calc(100% - 10px); /* Altura ajustada, levando em consideração o espaço extra de 5px no topo e no fundo */
 }
 
 .gallery img {
