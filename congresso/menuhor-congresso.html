@@ -1,0 +1,91 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+	<!-- Font Awesome -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+
+	<!-- Google Font -->
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Lato:wght@700&display=swap" rel="stylesheet">
+
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+			-webkit-box-sizing: border-box;
+			box-sizing: border-box;
+		}
+
+		.navMenu {
+			font-family: 'Advent Pro', sans-serif;
+			padding: 8px;
+			text-align: center;
+			margin: 7px auto;
+			width: 100%;
+			display: flex;
+			justify-content: space-between; /* Ajusta a distribuição dos itens */
+			gap: 10px; /* Diminui o espaçamento entre os itens */
+			flex-wrap: wrap; /* Permite que os itens se ajustem em telas menores */
+		}
+
+		.navMenu a {
+			color: #272727;
+			text-decoration: none;
+			text-transform: uppercase;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 6px 8px; /* Ajusta o padding para diminuir o tamanho */
+			font-size: 14px; /* Reduz o tamanho do texto */
+			flex-direction: column; /* Organiza ícone e texto em coluna */
+			max-width: 100px; /* Limita a largura dos itens */
+			overflow: hidden; /* Evita que o conteúdo ultrapasse o limite */
+		}
+
+		.navMenu a i {
+			font-size: 20px; /* Ajusta o tamanho do ícone */
+			margin-bottom: 4px; /* Dá um pequeno espaço entre o ícone e o texto */
+		}
+
+		/* Estilo para o botão "Início" */
+		#congresso {
+			color: white;
+			background-color: #28a745; /* Verde */
+		}
+
+		#congresso:hover {
+			background-color: #218838; /* Cor mais escura de verde */
+		}
+
+		/* Estilo para os outros botões */
+		.navMenu a:hover {
+			color: #d09c0b;
+		}
+	</style>
+</head>
+
+<body>
+
+	<nav class="navMenu">
+		<a id="inicio" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-house"></i>Ínicio</a> <!-- Apenas o ícone e cor verde -->
+		<a id="congresso" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-inbox"></i>2025</a>
+		<a id="galeria" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-calendar-week"></i>Galeria</a>
+		<a id="sobre" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-briefcase"></i>Sobre</a>
+	</nav>
+
+	<script>
+		function navigate(id) {
+			if (id == 'inicio') window.open("https://curandoasraizes.notion.site/inicio", '_blank').focus();
+			else if (id == "congresso") window.open("https://curandoasraizes.notion.site/congresso", '_blank').focus();
+			else if (id == "galeria") window.open("https://curandoasraizes.notion.site/galeria", '_blank').focus();
+			else if (id == "sobre") window.open("https://curandoasraizes.notion.site/sobre", '_blank').focus();
+		}
+	</script>
+
+</body>
+
+</html>
