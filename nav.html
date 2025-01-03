@@ -26,8 +26,8 @@
 			margin: 7px auto;
 			width: 100%;
 			display: flex;
-			justify-content: space-around; /* Alinha os itens horizontalmente */
-			gap: 15px;
+			justify-content: space-between; /* Ajusta a distribuição dos itens */
+			gap: 10px; /* Diminui o espaçamento entre os itens */
 			flex-wrap: wrap; /* Permite que os itens se ajustem em telas menores */
 		}
 
@@ -38,18 +38,16 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			padding: 8px 10px;
-			border: none;
+			padding: 6px 8px; /* Ajusta o padding para diminuir o tamanho */
 			font-size: 14px; /* Reduz o tamanho do texto */
-			text-align: center;
-			flex-direction: column; /* Alinha ícone e texto verticalmente */
-			max-width: 120px; /* Limita a largura dos itens */
+			flex-direction: column; /* Organiza ícone e texto em coluna */
+			max-width: 100px; /* Limita a largura dos itens */
 			overflow: hidden; /* Evita que o conteúdo ultrapasse o limite */
 		}
 
 		.navMenu a i {
-			font-size: 24px; /* Ajusta o tamanho do ícone */
-			margin-bottom: 5px; /* Dá espaço entre o ícone e o texto */
+			font-size: 20px; /* Ajusta o tamanho do ícone */
+			margin-bottom: 4px; /* Dá um pequeno espaço entre o ícone e o texto */
 		}
 
 		/* Estilo para o botão "Início" */
@@ -66,14 +64,6 @@
 		.navMenu a:hover {
 			color: #d09c0b;
 		}
-
-		.background {
-			background-color: #ece5f0;
-		}
-
-		.border {
-			border: 1px solid #cccccc;
-		}
 	</style>
 </head>
 
@@ -81,7 +71,7 @@
 
 	<nav class="navMenu">
 		<a id="home" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-house"></i></a> <!-- Apenas o ícone e cor verde -->
-		<a id="inbox" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-inbox"></i> Congresso 2025</a>
+		<a id="inbox" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-inbox"></i>2025</a>
 		<a id="week" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-calendar-week"></i> Galeria</a>
 		<a id="projects" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-briefcase"></i> Sobre</a>
 	</nav>
