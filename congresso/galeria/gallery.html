@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Galeria de Fotos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="gallery-container" id="gallery-container">
+    <!-- As imagens serão carregadas aqui dinamicamente via JavaScript -->
+  </div>
+
+  <!-- Modal de Imagem -->
+  <div class="modal" id="modal">
+    <span class="close" id="close">&times;</span>
+    <div class="modal-content">
+      <button class="prev" id="prev">&#10094;</button>
+      <img class="modal-image" id="modal-image" src="" alt="">
+      <button class="next" id="next">&#10095;</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
