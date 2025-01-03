@@ -3,8 +3,8 @@
   overflow-x: scroll;
   white-space: nowrap;
   max-height: calc(100% - 10px); /* Altura ajustada, levando em consideração o espaço extra de 5px no topo e no fundo */
-  padding-top: 0px;
-  padding-bottom: 0px;
+  padding-top: 3px;
+  padding-bottom: 3px;
 }
 
 .gallery img {
