@@ -2,15 +2,15 @@
 .gallery-container {
   overflow-x: scroll;
   white-space: nowrap;
-  max-height: 400px; /* Altura fixa */
+  max-height: calc(100% - 10px); /* Altura ajustada, levando em consideração o espaço extra de 5px no topo e no fundo */
 }
 
 .gallery img {
   width: auto;
-  height: 100%;
+  height: 100%; /* Ajusta a altura das imagens para caberem dentro da altura do box */
   display: inline-block;
   margin-right: 15px;
-  cursor: pointer;
+  object-fit: contain; /* Mantém a proporção da imagem */
 }
 
 /* Modal */
@@ -42,7 +42,8 @@ button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  background-color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(0, 0, 0, 0);
+  color: gray;
   border: none;
   font-size: 24px;
   cursor: pointer;
