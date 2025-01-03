@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Uma galeria de imagens interativa e responsiva com efeitos visuais dinâmicos.">
+  <title>Galeria de Imagens</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- BaguetteBox CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
+  <!-- AOS Animation CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Custom CSS -->
+  <link href="./css/thumbnail-gallery.css" rel="stylesheet">
+
+  <style>
+    .tz-gallery {
+      padding: 40px;
+    }
+
+    .tz-gallery .thumbnail {
+      padding: 0;
+      margin-bottom: 30px;
+      background-color: #fff;
+      border-radius: 4px;
+      border: none;
+      transition: 0.15s ease-in-out;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .tz-gallery .thumbnail:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .baguetteBox-button {
+      background-color: transparent !important;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section id="gallery">
+      <div class="gallery-container container">
+        <div class="tz-gallery">
+          <div class="row" id="gallery-row">
+            <!-- Imagens serão inseridas dinamicamente -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv6v9KI65qnmQkk7SMaHjEnWgIYfSvHXc/x7i/t7ZXQ" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJxAujRfdKaSf6mLT0roM9ABUga6lFQtOUq2FSpFGBhPaX" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-mfP5ttIjH+e5sI6bqjlFsaAsF3xXKnX2p8FygFJZeI1AoG6FC7x4W5F8r5KbrPI" crossorigin="anonymous"></script>
+
+  <!-- BaguetteBox JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+  <!-- AOS Animation JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png'];
+      const galleryRow = document.getElementById('gallery-row');
+
+      images.forEach((image, index) => {
+        const delay = index * 20;
+        const col = document.createElement('div');
+        col.className = 'col-sm-6 col-md-4';
+        col.setAttribute('data-aos', 'flip-up');
+        col.setAttribute('data-aos-delay', delay);
+
+        col.innerHTML = `
+          <div class="thumbnail">
+            <a class="lightbox" href="${image}">
+              <img src="${image}" alt="Descrição da imagem ${index + 1}">
+            </a>
+          </div>
+        `;
+
+        galleryRow.appendChild(col);
+      });
+
+      // Inicializa BaguetteBox e AOS
+      baguetteBox.run('.tz-gallery');
+      AOS.init();
+    });
+  </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Uma galeria de imagens interativa e responsiva com efeitos visuais dinâmicos.">
+  <title>Galeria de Imagens</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- BaguetteBox CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
+  <!-- AOS Animation CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Custom CSS -->
+  <link href="./css/thumbnail-gallery.css" rel="stylesheet">
+
+  <style>
+    .tz-gallery {
+      padding: 40px;
+    }
+
+    .tz-gallery .thumbnail {
+      padding: 0;
+      margin-bottom: 30px;
+      background-color: #fff;
+      border-radius: 4px;
+      border: none;
+      transition: 0.15s ease-in-out;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .tz-gallery .thumbnail:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .baguetteBox-button {
+      background-color: transparent !important;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section id="gallery">
+      <div class="gallery-container container">
+        <div class="tz-gallery">
+          <div class="row" id="gallery-row">
+            <!-- Imagens serão inseridas dinamicamente -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv6v9KI65qnmQkk7SMaHjEnWgIYfSvHXc/x7i/t7ZXQ" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJxAujRfdKaSf6mLT0roM9ABUga6lFQtOUq2FSpFGBhPaX" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-mfP5ttIjH+e5sI6bqjlFsaAsF3xXKnX2p8FygFJZeI1AoG6FC7x4W5F8r5KbrPI" crossorigin="anonymous"></script>
+
+  <!-- BaguetteBox JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+  <!-- AOS Animation JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png'];
+      const galleryRow = document.getElementById('gallery-row');
+
+      images.forEach((image, index) => {
+        const delay = index * 20;
+        const col = document.createElement('div');
+        col.className = 'col-sm-6 col-md-4';
+        col.setAttribute('data-aos', 'flip-up');
+        col.setAttribute('data-aos-delay', delay);
+
+        col.innerHTML = `
+          <div class="thumbnail">
+            <a class="lightbox" href="${image}">
+              <img src="${image}" alt="Descrição da imagem ${index + 1}">
+            </a>
+          </div>
+        `;
+
+        galleryRow.appendChild(col);
+      });
+
+      // Inicializa BaguetteBox e AOS
+      baguetteBox.run('.tz-gallery');
+      AOS.init();
+    });
+  </script>
+</body>
+
+</html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Uma galeria de imagens interativa e responsiva com efeitos visuais dinâmicos.">
+  <title>Galeria de Imagens</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+  <!-- BaguetteBox CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.css">
+
+  <!-- AOS Animation CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css">
+
+  <!-- Custom CSS -->
+  <link href="./css/thumbnail-gallery.css" rel="stylesheet">
+
+  <style>
+    .tz-gallery {
+      padding: 40px;
+    }
+
+    .tz-gallery .thumbnail {
+      padding: 0;
+      margin-bottom: 30px;
+      background-color: #fff;
+      border-radius: 4px;
+      border: none;
+      transition: 0.15s ease-in-out;
+      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.06);
+    }
+
+    .tz-gallery .thumbnail:hover {
+      transform: translateY(-10px) scale(1.02);
+    }
+
+    .baguetteBox-button {
+      background-color: transparent !important;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <main>
+    <section id="gallery">
+      <div class="gallery-container container">
+        <div class="tz-gallery">
+          <div class="row" id="gallery-row">
+            <!-- Imagens serão inseridas dinamicamente -->
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv6v9KI65qnmQkk7SMaHjEnWgIYfSvHXc/x7i/t7ZXQ" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJxAujRfdKaSf6mLT0roM9ABUga6lFQtOUq2FSpFGBhPaX" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-mfP5ttIjH+e5sI6bqjlFsaAsF3xXKnX2p8FygFJZeI1AoG6FC7x4W5F8r5KbrPI" crossorigin="anonymous"></script>
+
+  <!-- BaguetteBox JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/baguettebox.js/1.8.1/baguetteBox.min.js"></script>
+
+  <!-- AOS Animation JS -->
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const images = ['1.png', '2.png', '3.png', '4.png', '5.png', '6.png', '7.png', '8.png', '9.png'];
+      const galleryRow = document.getElementById('gallery-row');
+
+      images.forEach((image, index) => {
+        const delay = index * 20;
+        const col = document.createElement('div');
+        col.className = 'col-sm-6 col-md-4';
+        col.setAttribute('data-aos', 'flip-up');
+        col.setAttribute('data-aos-delay', delay);
+
+        col.innerHTML = `
+          <div class="thumbnail">
+            <a class="lightbox" href="${image}">
+              <img src="${image}" alt="Descrição da imagem ${index + 1}">
+            </a>
+          </div>
+        `;
+
+        galleryRow.appendChild(col);
+      });
+
+      // Inicializa BaguetteBox e AOS
+      baguetteBox.run('.tz-gallery');
+      AOS.init();
+    });
+  </script>
+</body>
+
+</html>
