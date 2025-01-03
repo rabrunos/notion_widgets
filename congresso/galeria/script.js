@@ -41,6 +41,13 @@ closeButton.addEventListener("click", () => {
   modal.style.display = "none";
 });
 
+// Fechar o modal clicando fora da imagem
+modal.addEventListener("click", (event) => {
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+});
+
 // Navegar para a imagem anterior
 prevButton.addEventListener("click", () => {
   currentIndex = (currentIndex - 1 + images.length) % images.length;
@@ -52,3 +59,37 @@ nextButton.addEventListener("click", () => {
   currentIndex = (currentIndex + 1) % images.length;
   modalImage.src = images[currentIndex].src;
 });
+
+// Funcionalidade de arraste para mudar de imagem (swipe)
+let touchStartX = 0;
+let touchEndX = 0;
+
+modalImage.addEventListener("touchstart", (event) => {
+  touchStartX = event.changedTouches[0].screenX;
+});
+
+modalImage.addEventListener("touchend", (event) => {
+  touchEndX = event.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  if (touchStartX > touchEndX + 50) {
+    // Swipe para a esquerda - próxima imagem
+    nextImage();
+  } else if (touchStartX < touchEndX - 50) {
+    // Swipe para a direita - imagem anterior
+    prevImage();
+  }
+}
+
+// Funções para navegação de imagem
+function nextImage() {
+  currentIndex = (currentIndex + 1) % images.length;
+  modalImage.src = images[currentIndex].src;
+}
+
+function prevImage() {
+  currentIndex = (currentIndex - 1 + images.length) % images.length;
+  modalImage.src = images[currentIndex].src;
+}
