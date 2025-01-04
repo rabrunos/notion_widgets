@@ -6,48 +6,42 @@ let nextButton = document.getElementById("next");
 
 let currentIndex = 0;
 let images = [];
+let aviso = null; // Elemento do aviso
 
-// Elemento do aviso
-let aviso = null;
-let avisoAberto = false;
-
-// Função para carregar as imagens da galeria
-function loadGallery(galleryFolder) {
+// Função para carregar as imagens da galeria dinamicamente a partir do HTML
+function loadGallery() {
   const galleryContainer = document.getElementById("gallery-container");
+  const galleryFolder = galleryContainer.dataset.gallery;
+  const galleryLimit = galleryContainer.dataset.limit;
+ 
+  galleryContainer.innerHTML = ""; // Limpa o conteúdo da galeria
 
-  // Limpa o conteúdo da galeria
-  galleryContainer.innerHTML = "";
-
-  // Carregar as imagens da pasta especificada
-  for (let i = 1; i <= 6; i++) { // Alterar 6 para o número máximo de fotos da galeria
+  for (let i = 1; i <= galleryLimit; i++) { // Quantidade dinamica de fotos
     const img = document.createElement("img");
-    img.src = `fotos/${galleryFolder}/${i}.png`; // Ajuste de caminho baseado na estrutura fornecida
+    img.src = `fotos/${galleryFolder}/${i}.png`; // Caminho dinâmico para a imagem
     img.alt = `Foto ${i}`;
-    img.classList.add("gallery"); // Adiciona a classe à imagem
+    img.classList.add("gallery");
     galleryContainer.appendChild(img);
     images.push(img);
   }
 
-  // Adicionar o comportamento de abrir a imagem no modal
+  // Evento de clique para abrir o modal
   images.forEach((image, index) => {
     image.addEventListener("click", () => {
       currentIndex = index;
       modal.style.display = "flex";
       modalImage.src = image.src;
-
-      // Exibir o aviso
-      showAviso();
+      showAviso(); // Exibe o aviso
     });
   });
 }
 
-// Carregar a galeria desejada ao acessar o arquivo HTML
-loadGallery("galeria1"); // Troque "galeria1" pelo nome da galeria desejada
+loadGallery(); // Carregar a galeria desejada automaticamente
 
 // Fechar o modal
 closeButton.addEventListener("click", () => {
   modal.style.display = "none";
-  if (aviso) aviso.remove(); // Remove o aviso quando o modal for fechado
+  removeAviso(); // Remove o aviso ao fechar o modal
   resetSetas(); // Reseta a cor das setas
 });
 
@@ -55,124 +49,100 @@ closeButton.addEventListener("click", () => {
 modal.addEventListener("click", (event) => {
   if (event.target === modal) {
     modal.style.display = "none";
-    if (aviso) aviso.remove(); // Remove o aviso ao clicar fora da imagem
+    removeAviso(); // Remove o aviso ao clicar fora da imagem
     resetSetas(); // Reseta a cor das setas
   }
 });
 
 // Função para exibir o aviso
 function showAviso() {
-  // Verifica se o aviso já existe para evitar múltiplos avisos
-  if (!aviso) {
+  if (!aviso) { // Evita criar múltiplos avisos
     aviso = document.createElement("div");
     aviso.style.position = "absolute";
+    
+    // Obtém as dimensões reais da imagem
+    const imageRect = modalImage.getBoundingClientRect();
+    aviso.style.width = `${imageRect.width}px`;
+    aviso.style.height = `${imageRect.height}px`;
+    aviso.style.top = `${modalImage.offsetTop}px`;
+    aviso.style.left = `${modalImage.offsetLeft}px`;
 
-    // Obtém as dimensões reais da imagem sem incluir margens
-    let imageRect = modalImage.getBoundingClientRect();
-
-    aviso.style.width = `${imageRect.width}px`; // Largura exata da imagem
-    aviso.style.height = `${imageRect.height}px`; // Altura exata da imagem
-    aviso.style.top = `${modalImage.offsetTop}px`; // Alinha com o topo da imagem
-    aviso.style.left = `${modalImage.offsetLeft}px`; // Alinha com a esquerda da imagem
-
-    aviso.style.backgroundColor = "rgba(0, 0, 0, 0.4)";
+    aviso.style.backgroundColor = "rgba(0, 0, 0, 0.45)";
     aviso.style.display = "flex";
-    aviso.style.flexDirection = "column"; // Organiza o texto em coluna
-    aviso.style.justifyContent = "center"; // Centraliza verticalmente
-    aviso.style.alignItems = "center"; // Centraliza horizontalmente
+    aviso.style.flexDirection = "column";
+    aviso.style.justifyContent = "center";
+    aviso.style.alignItems = "center";
     aviso.style.color = "white";
     aviso.style.cursor = "pointer";
     aviso.style.fontFamily = "Roboto, sans-serif";
-    aviso.style.fontSize = "20px";
-    aviso.style.textAlign = "center"; // Garante que o texto seja centralizado
-    aviso.innerText = "Clique nos cantos ou\narraste para mudar a imagem."; // O texto com a quebra de linha
-    
-    // Insere o aviso logo após o primeiro elemento (que é a imagem)
-    let modalContent = document.querySelector(".modal-content");
-    modalContent.insertBefore(aviso, modalContent.firstChild.nextSibling);
+    aviso.style.fontSize = "17px";
+    aviso.style.textAlign = "center";
+    aviso.innerText = "Clique nos cantos ou\narraste para mudar a imagem.";
 
+    // Inserção no DOM
+    let modalContent = document.querySelector(".modal-content");
+    modalContent.insertBefore(aviso, modalContent.firstChild);
 
     // Muda a cor das setas
     prevButton.style.color = "rgb(255, 255, 255)";
     nextButton.style.color = "rgb(255, 255, 255)";
 
-    avisoAberto = true;
-
-    // Remove o aviso após 3 segundos sem interação
-    setTimeout(() => {
-      if (aviso) aviso.remove();
-      resetSetas();
-      avisoAberto = false;
-    }, 4000);
-
+    // Remove o aviso após 4 segundos
+    setTimeout(removeAviso, 4000);
+    
     // Aguardar interação para remover o aviso
-    aviso.addEventListener("click", () => {
-      aviso.remove();
-      resetSetas();
-      avisoAberto = false;
-    });
+    aviso.addEventListener("click", removeAviso);
 
-    // Adiciona a funcionalidade de arraste para trocar a imagem
+    // Adiciona a funcionalidade de arraste
     modalImage.addEventListener("touchstart", startSwipe);
     modalImage.addEventListener("touchend", endSwipe);
   }
 }
 
-// Função para resetar as setas
-function resetSetas() {
-  prevButton.style.color = "rgb(0, 0, 0, 0)";
-  nextButton.style.color = "rgb(0, 0, 0, 0)";
-}
-
-// Função para fechar o aviso
-function closeAviso() {
+// Função para remover o aviso e resetar as setas
+function removeAviso() {
   if (aviso) {
     aviso.remove(); // Remove o aviso da tela
     resetSetas(); // Restaura a funcionalidade das setas
-    avisoAberto = false;
   }
+}
+
+// Função para resetar as setas
+function resetSetas() {
+  prevButton.style.color = "rgba(0, 0, 0, 0)";
+  nextButton.style.color = "rgba(0, 0, 0, 0)";
+}
+
+// Navegação de imagens
+function navigateImage(offset) {
+  currentIndex = (currentIndex + offset + images.length) % images.length;
+  modalImage.src = images[currentIndex].src;
 }
 
 // Navegar para a imagem anterior
 prevButton.addEventListener("click", () => {
-  if (avisoAberto) {
-    closeAviso(); // Se o aviso estiver aberto, fecha-o
-  } else {
-    currentIndex = (currentIndex - 1 + images.length) % images.length;
-    modalImage.src = images[currentIndex].src; // Avança para a imagem anterior
-  }
+  if (aviso) removeAviso(); // Fecha o aviso, se aberto
+  navigateImage(-1); // Navega para a imagem anterior
 });
 
 // Navegar para a próxima imagem
 nextButton.addEventListener("click", () => {
-  if (avisoAberto) {
-    closeAviso(); // Se o aviso estiver aberto, fecha-o
-  } else {
-    currentIndex = (currentIndex + 1) % images.length;
-    modalImage.src = images[currentIndex].src; // Avança para a próxima imagem
-  }
+  if (aviso) removeAviso(); // Fecha o aviso, se aberto
+  navigateImage(1); // Navega para a próxima imagem
 });
 
-
-// Função de swipe
+// Função de swipe (melhoria: elimina variáveis globais)
 let touchStartX = 0;
-let touchEndX = 0;
 
 function startSwipe(event) {
   touchStartX = event.changedTouches[0].screenX;
 }
 
 function endSwipe(event) {
-  touchEndX = event.changedTouches[0].screenX;
-  handleSwipe();
-}
-
-function handleSwipe() {
+  const touchEndX = event.changedTouches[0].screenX;
   if (touchStartX > touchEndX + 50) {
-    // Swipe para a esquerda - próxima imagem
-    nextButton.click();
+    nextButton.click(); // Swipe para a esquerda
   } else if (touchStartX < touchEndX - 50) {
-    // Swipe para a direita - imagem anterior
-    prevButton.click();
+    prevButton.click(); // Swipe para a direita
   }
 }
