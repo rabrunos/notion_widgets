@@ -8,35 +8,44 @@ let currentIndex = 0;
 let images = [];
 let aviso = null; // Elemento do aviso
 
-// Função para carregar as imagens da galeria dinamicamente a partir do HTML
-function loadGallery() {
+async function loadGallery() {
   const galleryContainer = document.getElementById("gallery-container");
   const galleryFolder = galleryContainer.dataset.gallery;
-  const galleryLimit = galleryContainer.dataset.limit;
- 
+  const galleryLimit = parseInt(galleryContainer.dataset.limit, 10);
+  const imageExtensions = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
+  const videoExtensions = ['mp4', 'mov'];
+
   galleryContainer.innerHTML = ""; // Limpa o conteúdo da galeria
 
-  for (let i = 1; i <= galleryLimit; i++) { // Quantidade dinamica de fotos
-    const img = document.createElement("img");
-    img.src = `fotos/${galleryFolder}/${i}.png`; // Caminho dinâmico para a imagem
-    img.alt = `Foto ${i}`;
-    img.classList.add("gallery");
-    galleryContainer.appendChild(img);
-    images.push(img);
-  }
+  try {
+    const response = await fetch(`https://api.github.com/repos/rabrunos/notion_widgets/contents/congresso/galeria/fotos/${galleryFolder}`);
+    const files = await response.json();
 
-  // Evento de clique para abrir o modal
-  images.forEach((image, index) => {
-    image.addEventListener("click", () => {
-      currentIndex = index;
-      modal.style.display = "flex";
-      modalImage.src = image.src;
-      showAviso(); // Exibe o aviso
+    files.forEach(file => {
+      const fileName = file.name;
+      const fileExtension = fileName.split('.').pop().toLowerCase();
+
+      if (imageExtensions.includes(fileExtension)) {
+        const img = document.createElement("img");
+        img.src = file.download_url;
+        img.alt = fileName;
+        img.classList.add("gallery");
+        galleryContainer.appendChild(img);
+      } else if (videoExtensions.includes(fileExtension)) {
+        const video = document.createElement("video");
+        video.src = file.download_url;
+        video.controls = true;
+        video.classList.add("gallery");
+        galleryContainer.appendChild(video);
+      }
     });
-  });
+  } catch (error) {
+    console.error('Erro ao carregar arquivos:', error);
+  }
 }
 
 loadGallery(); // Carregar a galeria desejada automaticamente
+
 
 // Fechar o modal
 closeButton.addEventListener("click", () => {
@@ -75,7 +84,7 @@ function showAviso() {
     aviso.style.color = "white";
     aviso.style.cursor = "pointer";
     aviso.style.fontFamily = "Roboto, sans-serif";
-    aviso.style.fontSize = "15px";
+    aviso.style.fontSize = "17px";
     aviso.style.textAlign = "center";
     aviso.innerText = "Clique nos cantos ou\narraste para mudar a imagem.";
 
@@ -97,7 +106,7 @@ function showAviso() {
     modalImage.addEventListener("touchstart", startSwipe);
     modalImage.addEventListener("touchend", endSwipe);
 
-    // Adiciona a funcionalidade de arraste também nos botões
+        // Adiciona a funcionalidade de arraste também nos botões
     prevButton.addEventListener("touchstart", startSwipe);
     prevButton.addEventListener("touchend", endSwipe);
     nextButton.addEventListener("touchstart", startSwipe);
