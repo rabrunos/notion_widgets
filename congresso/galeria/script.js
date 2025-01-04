@@ -75,7 +75,7 @@ function showAviso() {
     aviso.style.color = "white";
     aviso.style.cursor = "pointer";
     aviso.style.fontFamily = "Roboto, sans-serif";
-    aviso.style.fontSize = "17px";
+    aviso.style.fontSize = "15px";
     aviso.style.textAlign = "center";
     aviso.innerText = "Clique nos cantos ou\narraste para mudar a imagem.";
 
@@ -96,6 +96,12 @@ function showAviso() {
     // Adiciona a funcionalidade de arraste
     modalImage.addEventListener("touchstart", startSwipe);
     modalImage.addEventListener("touchend", endSwipe);
+
+    // Adiciona a funcionalidade de arraste também nos botões
+    prevButton.addEventListener("touchstart", startSwipe);
+    prevButton.addEventListener("touchend", endSwipe);
+    nextButton.addEventListener("touchstart", startSwipe);
+    nextButton.addEventListener("touchend", endSwipe);
   }
 }
 
