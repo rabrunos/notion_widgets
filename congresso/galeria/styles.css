@@ -41,52 +41,22 @@ button {
   position: absolute;
   top: 50%;
   height: 100%;
-  width: 40%;
+  width: 35%;
   transform: translateY(-50%);
   background-color: rgba(0, 0, 0, 0);
+  color: rgb(255, 255, 255);
   border: none;
   font-size: 24px;
   cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-button .arrow {
-  font-size: 32px; /* Ajuste o tamanho da seta */
-  color: rgb(226, 211, 211); /* Cor padrão das setas */
 }
 
 button.prev {
-  left: 0;
+  left: 10px;
 }
 
 button.next {
-  right: 0;
+  right: 10px;
 }
-
-/* Estilo para o botão de próximo (seta direita) */
-button.next .arrow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  background-color: rgb(0, 0, 0, 0.03);
-  color: rgba(255, 255, 255, 0.6); /* Cor da seta de avançar */
-}
-
-/* Estilo para o botão de anterior (seta esquerda) */
-button.prev .arrow {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 40px;
-  width: 40px;
-  background-color: rgb(0, 0, 0, 0.03);
-  color: rgba(255, 255, 255, 0.6); /* Cor da seta de voltar */
-}
-
 
 .close {
   position: absolute;
