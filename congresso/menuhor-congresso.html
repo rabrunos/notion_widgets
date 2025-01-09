@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 
@@ -22,9 +21,8 @@
 
 		.navMenu {
 			font-family: 'Advent Pro', sans-serif;
-			padding: 8px;
+			padding: 0 8px; /* Apenas padding lateral */
 			text-align: center;
-			margin: 7px auto;
 			width: 100%;
 			display: flex;
 			justify-content: space-between; /* Ajusta a distribuição dos itens */
@@ -39,10 +37,11 @@
 			display: flex;
 			justify-content: center;
 			align-items: center;
-			padding: 6px 8px; /* Ajusta o padding para diminuir o tamanho */
+			padding: 8px; /* Padding uniforme */
+			width: 66px; /* Largura fixa */
+			height: 66px; /* Altura fixa */
 			font-size: 14px; /* Reduz o tamanho do texto */
 			flex-direction: column; /* Organiza ícone e texto em coluna */
-			max-width: 100px; /* Limita a largura dos itens */
 			overflow: hidden; /* Evita que o conteúdo ultrapasse o limite */
 		}
 
@@ -73,7 +72,7 @@
 	<nav class="navMenu">
 		<a id="inicio" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-house"></i>Ínicio</a> <!-- Apenas o ícone e cor verde -->
 		<a id="congresso" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-inbox"></i>2025</a>
-		<a id="galeria" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-calendar-week"></i>Galeria</a>
+		<a id="galeria" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-calendar-week"></i>Fotos</a>
 		<a id="sobre" onclick="navigate(this.id)" href="#"> <i class="fa-solid fa-briefcase"></i>Sobre</a>
 	</nav>
 
