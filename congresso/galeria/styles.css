@@ -2,14 +2,25 @@
 .gallery-container {
   display: flex;
   overflow-x: auto;
-  height: 350px;
+  height: 100vh; /* Definindo a altura da galeria com base na altura da página */
   white-space: nowrap;
   align-items: center;
 }
 
+/* Estilo para os links (elementos <a>) que contêm as imagens e vídeos */
+.gallery-container a {
+  display: flex;
+  justify-content: center; /* Centraliza a imagem/vídeo */
+  align-items: center; /* Centraliza a imagem/vídeo */
+  height: 100%; /* O link ocupa 100% da altura do container */
+  width: auto; /* A largura do link é ajustada automaticamente */
+}
+
+/* Estilo para imagens e vídeos dentro da galeria */
 .gallery-container img,
 .gallery-container video {
-  height: 325px;
-  object-fit: contain;
-  margin-right: 15px;
+  max-height: 100%; /* Limita a altura da imagem/vídeo ao tamanho do link (que é 100% da altura do container) */
+  max-width: auto; /* Limita a largura da imagem/vídeo ao tamanho do link */
+  object-fit: contain; /* Garante que a imagem ou vídeo se ajuste sem distorcer */
+  margin-right: 15px; /* Espaçamento entre os elementos */
 }
