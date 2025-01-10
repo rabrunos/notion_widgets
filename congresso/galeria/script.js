@@ -64,7 +64,7 @@ async function loadGallery() {
   const lightbox = GLightbox({
     selector: '.glightbox',
     touchNavigation: true,
-    loop: false,
+    loop: true,
     autoplayVideos: false,
   });
 }
