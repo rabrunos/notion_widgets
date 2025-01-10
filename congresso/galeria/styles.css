@@ -2,7 +2,7 @@
 .gallery-container {
   display: flex;
   overflow-x: auto;
-  height: 95vh; /* Definindo a altura da galeria com base na altura da página */
+  height: 96vh; /* Definindo a altura da galeria com base na altura da página */
   white-space: nowrap;
   align-items: center;
 }
@@ -22,10 +22,5 @@
   max-height: 100%; /* Limita a altura da imagem/vídeo ao tamanho do link (que é 100% da altura do container) */
   max-width: auto; /* Limita a largura da imagem/vídeo ao tamanho do link */
   object-fit: contain; /* Garante que a imagem ou vídeo se ajuste sem distorcer */
-  margin-right: 15px; /* Espaçamento entre os elementos */
-}
-
-.glightbox .gprev,
-.glightbox .gnext {
-  display: block !important;
+  margin-right: 5px; /* Espaçamento entre os elementos */
 }
