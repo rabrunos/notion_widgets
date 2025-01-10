@@ -24,3 +24,8 @@
   object-fit: contain; /* Garante que a imagem ou vídeo se ajuste sem distorcer */
   margin-right: 15px; /* Espaçamento entre os elementos */
 }
+
+.glightbox .gprev,
+.glightbox .gnext {
+  display: block !important;
+}
