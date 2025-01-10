@@ -2,7 +2,7 @@
 .gallery-container {
   display: flex;
   overflow-x: auto;
-  height: 100vh; /* Definindo a altura da galeria com base na altura da página */
+  height: 95vh; /* Definindo a altura da galeria com base na altura da página */
   white-space: nowrap;
   align-items: center;
 }
