@@ -2,14 +2,14 @@
 .gallery-container {
   display: flex;
   overflow-x: auto;
-  height: 200px;
+  height: 350px;
   white-space: nowrap;
   align-items: center;
 }
 
 .gallery-container img,
 .gallery-container video {
-  height: 175px;
+  height: 325px;
   object-fit: contain;
   margin-right: 15px;
 }
