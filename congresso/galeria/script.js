@@ -1,10 +1,21 @@
+// Função para verificar a existência de um arquivo no servidor
+async function fileExists(url) {
+  try {
+    const response = await fetch(url, { method: 'HEAD' });
+    return response.ok;
+  } catch (error) {
+    console.error(`Error verifying file ${url}:`, error);
+    return false;
+  }
+}
+
 // Função para carregar as imagens e vídeos da galeria dinamicamente
 async function loadGallery() {
   const galleryContainer = document.getElementById('gallery-container');
   const galleryFolder = galleryContainer.dataset.gallery; // Nome da pasta da galeria
-  const galleryLimit = galleryContainer.dataset.limit;; // Limite de arquivos a serem carregados
+  const galleryLimit = galleryContainer.dataset.limit || 10; // Limite de arquivos a serem carregados
   const imageExtensions = ['png', 'jpg', 'jpeg', 'bmp', 'gif'];
-  const videoExtensions = ['mp4', 'mov', "webm"];
+  const videoExtensions = ['mp4', 'mov', 'webm'];
 
   // Carregar a lista de arquivos da galeria a partir do arquivo JSON correspondente
   const response = await fetch(`media/${galleryFolder}/${galleryFolder}.json`);
@@ -13,36 +24,41 @@ async function loadGallery() {
   // Ordenar a lista de arquivos em ordem alfabética
   fileList.sort();
 
-  // Limitar a quantidade de arquivos conforme o limite especificado
-  const filesToLoad = fileList.slice(0, galleryLimit);
+  let loadedCount = 0;
 
-  // Criar os elementos de mídia e adicioná-los ao contêiner da galeria
-  filesToLoad.forEach((fileName) => {
+  for (const fileName of fileList) {
+    if (loadedCount >= galleryLimit) break;
+
     const fileExtension = fileName.split('.').pop().toLowerCase();
-    let mediaElement;
+    const filePath = `media/${galleryFolder}/${fileName}`;
 
-    if (imageExtensions.includes(fileExtension)) {
-      mediaElement = document.createElement('a');
-      mediaElement.href = `media/${galleryFolder}/${fileName}`;
-      mediaElement.classList.add('glightbox');
-      const img = document.createElement('img');
-      img.src = `media/${galleryFolder}/${fileName}`;
-      img.alt = fileName;
-      mediaElement.appendChild(img);
-    } else if (videoExtensions.includes(fileExtension)) {
-      mediaElement = document.createElement('a');
-      mediaElement.href = `media/${galleryFolder}/${fileName}`;
-      mediaElement.classList.add('glightbox');
-      const video = document.createElement('video');
-      video.src = `media/${galleryFolder}/${fileName}`;
-      video.controls = true;
-      mediaElement.appendChild(video);
-    }
+    if (await fileExists(filePath)) {
+      let mediaElement;
 
-    if (mediaElement) {
-      galleryContainer.appendChild(mediaElement);
+      if (imageExtensions.includes(fileExtension)) {
+        mediaElement = document.createElement('a');
+        mediaElement.href = filePath;
+        mediaElement.classList.add('glightbox');
+        const img = document.createElement('img');
+        img.src = filePath;
+        img.alt = fileName;
+        mediaElement.appendChild(img);
+      } else if (videoExtensions.includes(fileExtension)) {
+        mediaElement = document.createElement('a');
+        mediaElement.href = filePath;
+        mediaElement.classList.add('glightbox');
+        const video = document.createElement('video');
+        video.src = filePath;
+        video.controls = true;
+        mediaElement.appendChild(video);
+      }
+
+      if (mediaElement) {
+        galleryContainer.appendChild(mediaElement);
+        loadedCount++;
+      }
     }
-  });
+  }
 
   // Inicializar o GLightbox
   const lightbox = GLightbox({
